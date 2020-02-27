@@ -12,15 +12,15 @@
 
 # theme                  : "minimal-mistakes-jekyll"
 remote_theme           : mmistakes/minimal-mistakes
-minimal_mistakes_skin    : "" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "졸업프로젝트"
+title                    : "SongmooLee`s blog"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "Final project" #걍 처음엔 주석처리 되있었음
 name                     : "SongmooLee"
-description              : "Final Project"
+description              : "well"
 url                      : "https://SongmooLee.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -110,7 +110,7 @@ author:
   name             : "Songmoo Lee"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "컴공 201502088"
-  location         : "대전"
+  location         : "CNU"
   email            : "goonta96@naver.com"
   links:
     - label: "Email"
