@@ -1,5 +1,5 @@
 ---
-title: "스터디 1주차"
+title: "스터디 1주차 - 1"
 date: 2020-03-04
 categories: Study
 ---
