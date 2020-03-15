@@ -69,4 +69,4 @@ _ _ _
 출처 :
 [https://dev-troh.tistory.com/67](https://dev-troh.tistory.com/67)
 [https://scotthan.tistory.com/entry/플랫폼프레임워크란](https://scotthan.tistory.com/entry/플랫폼프레임워크란)
-[https://ddageung2.github.io/jekyll/update/second-post/](http://https://ddageung2.github.io/jekyll/update/second-post/)
+[https://ddageung2.github.io/jekyll/update/second-post/](https://ddageung2.github.io/jekyll/update/second-post/)

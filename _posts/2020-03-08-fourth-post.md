@@ -4,9 +4,7 @@ date: 2020-03-08
 categories: Study
 ---
 
-## 안드로이드 개발환경 구축
-
-- 필요한 요소들
+## 안드로이드 개발환경 요소들
 
  - VirtualBox: 윈도우 운영체제에서 안드로이드 플랫폼 소스 코드를 빌드하기 위한 리눅스를 설치하는데 사용하는 가상머신.
 
@@ -107,4 +105,4 @@ parse_new_section() = 매크로에 의해 구분된 명령어(on, service)를 �
 
 
 
-출처 : [https://ddageung2.github.io/jekyll/update/second-post/](http://https://ddageung2.github.io/jekyll/update/second-post/)
+출처 : [https://ddageung2.github.io/jekyll/update/second-post/](https://ddageung2.github.io/jekyll/update/second-post/)
