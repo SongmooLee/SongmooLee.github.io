@@ -26,7 +26,7 @@ OS 내부적으로는 리눅스 위에서 동작하는 네이티브 바이너리
 
 _ _ _
 
-### 달빅 가상 머신
+## 달빅 가상 머신
 
 안드로이드는 달빅 VM(DVM) 덕분에 256MB 메모리를 가진 모바일 디바이스에서 제대로 동작할 수 있게 되었다. 달빅은 모바일 디바이스에서 시도된 첫 번째 가상 머신은 아니다.
 썬마이크로시스템즈에서는 자바2 모바일에디션을 밀었지만, 거의 성공하지 못했다.
@@ -39,19 +39,22 @@ _ _ _
 출처 : [안드로이드 런타임 위키백과](https://ko.wikipedia.org/wiki/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C_%EB%9F%B0%ED%83%80%EC%9E%84)
 
 _ _ _
-### 안드로이드 런타임
+
+## 안드로이드 런타임
 
 Android Runtime(ART) : 안드로이드에서 사용되던 DVM의 한계점을 극복하기 위해 새로 개발된 런타임이다.
 
 
-### JVM, Dalvik VM, ART 비교
+## JVM, Dalvik VM, ART 비교
 
 1. JVM
+
 ByteCode → interpret → 각 플랫폼에 맞는 기계어로 번역 → 프로그램 실행
 장점 : WORA(write once read anywhere), OS에 구애 받지 않고 해당 OS에 맞는 기계어로 번역됨
 단점 : Native 언어들에 비해 속도가 느리다.
 
 2. Dalvik VM
+
 dex file을 Dalvik machine 위에 올리는 방식
 라이선스 문제로 인해 JVM 대신 Java 코드를 이용할 수 있도록 개발됨
 Bytecode → interpret → 실행 → 개선 → 네이티브 코드로 변환(JIT, Just in TIME 컴파일 방식)
@@ -59,36 +62,45 @@ Bytecode → interpret → 실행 → 개선 → 네이티브 코드로 변환(J
 단점 : 성능과 배터리에 악영향, JIT compile 된 코드가 올라가 메모리가 늘어남
 
 3. ART 방식(Android 4.4 Kitkat 이후)
+
 machine 위에서 OAT file을 돌리는 방식, VM이 아닌 런타임 시 사용되는 라이브러리
 앱을 설치할 때 완전히 네이티브 코드로 변환되어 설치됨(AOT 컴파일, Ahead-Of-Time 컴파일)
 장점 : 코드 Interpret 및 JIT compile 시간을 제거하여 performance가 향상됨
 단점 : 설치시점에 소스 코드를 번역하여 설치가 느리고, 파일을 따로 저장하기 때문에 용량이 커짐
 
-### 컴파일 방식 변화 과정 (DVM -> ART)
+## 컴파일 방식 변화 과정 (DVM -> ART)
 
 초창기(Android 4.4, Kitkat)
+
 호환성이 제대로 보장되지 않았다.
 Dalvik에서 작동하던 앱들이 ART에서 죽는 현상이 발생함
 
 Android 5.0, Lolipop 이후
+
 ART가 기본 런타임이 됨
 
 Android 7.0, Nougat 이후
+
 AOT 방식과 JIT 방식을 조합
 
 Android 8.0, Oreo 이후
+
 ART 방식의 개선이 이뤄져 많은 문제점이 해결
 
-### JIT Compiler vs AOT Compiler //컴파일러 비교
+## JIT Compiler vs AOT Compiler //컴파일러 비교
 
 JIT Compiler
+
 중간 언어(bytecode)를 읽지 않고, 프로그램이 실행될 때 한꺼번에 읽어서 번역을 진행
+
 장점 : 인터프리터 방식에 비해 성능 개선(약 10배 ~ 20배)
 단점 : 배터리 소모가 많아지고, 한번에 읽는 방식이기 때문에 화면 전환 시 속도도 느리다.
 
 AOT Compiler
+
 프로그램 설치 시 컴파일러를 제외한 소스코드를 로드
 추가 컴파일 작업 없이 바로 실행
+
 장점 : 사용자의 대기 시간이 거의 없음
 단점 : 설치 시 컴파일된 파일을 따로 저장하기 때문에 프로그램 크기가 증가
 
