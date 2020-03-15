@@ -4,7 +4,7 @@ date: 2020-03-15
 categories: Study
 ---
 
-##안드로이드와 리눅스의 공통점 및 차이점
+## 안드로이드와 리눅스의 공통점 및 차이점
 
 안드로이드는 자바를 개발 언어로 차용함으로써 개발자에게 진정한 Rapid Application Development 환경을 제공해주었다.
 
@@ -26,7 +26,7 @@ OS 내부적으로는 리눅스 위에서 동작하는 네이티브 바이너리
 
 _ _ _
 
-###달빅 가상 머신
+### 달빅 가상 머신
 
 안드로이드는 달빅 VM(DVM) 덕분에 256MB 메모리를 가진 모바일 디바이스에서 제대로 동작할 수 있게 되었다. 달빅은 모바일 디바이스에서 시도된 첫 번째 가상 머신은 아니다.
 썬마이크로시스템즈에서는 자바2 모바일에디션을 밀었지만, 거의 성공하지 못했다.
@@ -39,12 +39,12 @@ _ _ _
 출처 : [안드로이드 런타임 위키백과](https://ko.wikipedia.org/wiki/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C_%EB%9F%B0%ED%83%80%EC%9E%84)
 
 _ _ _
-###안드로이드 런타임
+### 안드로이드 런타임
 
 Android Runtime(ART) : 안드로이드에서 사용되던 DVM의 한계점을 극복하기 위해 새로 개발된 런타임이다.
 
 
-###JVM, Dalvik VM, ART 비교
+### JVM, Dalvik VM, ART 비교
 
 1. JVM
 ByteCode → interpret → 각 플랫폼에 맞는 기계어로 번역 → 프로그램 실행
@@ -64,7 +64,7 @@ machine 위에서 OAT file을 돌리는 방식, VM이 아닌 런타임 시 사�
 장점 : 코드 Interpret 및 JIT compile 시간을 제거하여 performance가 향상됨
 단점 : 설치시점에 소스 코드를 번역하여 설치가 느리고, 파일을 따로 저장하기 때문에 용량이 커짐
 
-###컴파일 방식 변화 과정 (DVM -> ART)
+### 컴파일 방식 변화 과정 (DVM -> ART)
 
 초창기(Android 4.4, Kitkat)
 호환성이 제대로 보장되지 않았다.
@@ -79,7 +79,7 @@ AOT 방식과 JIT 방식을 조합
 Android 8.0, Oreo 이후
 ART 방식의 개선이 이뤄져 많은 문제점이 해결
 
-###JIT Compiler vs AOT Compiler //컴파일러 비교
+### JIT Compiler vs AOT Compiler //컴파일러 비교
 
 JIT Compiler
 중간 언어(bytecode)를 읽지 않고, 프로그램이 실행될 때 한꺼번에 읽어서 번역을 진행
