@@ -120,6 +120,7 @@ property_init()는 초기화가 시작되는 단계에서 시스템 프로퍼티
 
 
 출처 : android internals::power user's view by Jonathan Levin
+
 _ _ _
 
 ## Zygote (자이고트)
@@ -136,6 +137,22 @@ _ _ _
 init는 모든 프로세스의 홀더이고, 자이고트는 다름 PID의 PPID이다.
 
 Zygote는 애플리케이션을 빠르게 구동하기 위해 미리 fork 되어 있는 프로세스이다. 시스템에서 exec() 호출을 통해 특정 애플리케이션을 실행 하고자 하기 전까지는 중립적인 상태, 즉 특정 애플리케이션과 합체되지 않는 상태를 유지하고 있다. 안드로이드에서 프로세스를 생성하는 방식이다. fork()와 execve()를 통하여 프로세스를 생성하는데, zygote를 통하여 프로세스가 생성되고 메모리를 공유하는 형식을 취한다.
+`
+![zygote](https://t1.daumcdn.net/cfile/tistory/2512E34F58B10E1837)
+
+Zygote는 init.rc 에 등록된 다음의 명령에 따라서 init process에서 실행된다.
+
+```
+service zygote /system/bin/app_process -Xzygote /system/bin --zygote --start-system-server
+    class main
+    socket zygote stream 660 root system
+    onrestart write /sys/android_power/request_state wake
+    onrestart write /sys/power/state on
+    onrestart restart media
+    onrestart restart netd
+```
+
+이 코드를 보면 zygote 는 app_process에서 실행된다. 그 이유는 Zygote가 자바로 작성되어 있어서 달빅 가상 머신이 생성되어 하고 생성된 가상 머신 위에서 ZygoteInit 클래스를 로딩하고 실행하는 구조이다. 이런 역할을 해주는 것이 app_process가 된다.
 
 #### 굳이 자이고트를 쓰는 이유 2가지
 
@@ -146,7 +163,32 @@ Zygote는 애플리케이션을 빠르게 구동하기 위해 미리 fork 되어
 
 참고하면 좋을 링크 : https://alnova2.tistory.com/1104
 
-출처 : 테크월드(http://www.epnc.co.kr), android internals::power user's view by Jonathan Levin, https://t1.daumcdn.net/cfile/tistory/19313F4A5057375B28
+출처 : 테크월드(http://www.epnc.co.kr), android internals::power user's view by Jonathan Levin, https://t1.daumcdn.net/cfile/tistory/19313F4A5057375B28, https://alnova2.tistory.com/1104
+
+_ _ _
+
+## 안드로이드 Go
+
+본질적으로 Android Go는 Android Oreo의 경량 버전으로, 운영 체제, Google Play 스토어, Google 앱 등 최적화된 세 영역으로 구성됩니다. 이것들은 성능이 낮은 하드웨어에서 더 잘 돌아갈 수 있도록 만들어졌습니다.
+
+### OS
+
+OS 자체는 Android Oreo를 기반으로 하지만 1GB 이하의 RAM이 장착된 스마트폰에서 실행되도록 제작되었습니다. 운영체제는 Android Nougat과 같은 내부 저장 공간의 약 절반을 차지하며 저장 공간이 부족한 스마트폰에 더 많은 미디어와 응용 프로그램을 저장할 수 있는 여유 공간을 제공합니다.
+
+또한 Android Oreo (Go 버전)를 실행하는 기기는 이전 Android 소프트웨어 (Android Oreo의 일반 버전에서도 마찬가지임)에 비해 앱을 15% 빠르게 실행한다고 하며 Google은 '데이터 세이버'기능을 활성화했습니다. 기본적으로 사용자가 시스템에서 모바일 데이터를 덜 소비하도록 지원합니다.
+
+### 타겟팅
+
+메모리 사용량 최적화
+ANR 및 비정상 종료 방지(Application Not Responding)
+5초 이내에 앱 시작하기
+앱 크기 최적화
+
+// 추가 자료 업로드 예정
+
+
+출처: https://smartits.tistory.com/160 [Smart ITs], https://developer.android.com/google-play/guides/android-go-edition?hl=ko
+
 
 
 
