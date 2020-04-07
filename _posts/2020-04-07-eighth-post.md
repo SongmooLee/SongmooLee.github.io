@@ -116,11 +116,15 @@ Libutil.so를 사용하여 바인더 드라이버를 통하여 통신이 이루�
 _ _ _
 
 ### 코드분석
+(android / platform / frameworks / base / master / . / core / java / android / os / Binder.java)
 
-//추후에
+[링크](https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/os/Binder.java)
+나중에보자 봐도 이해가 안간다
 
 
 
 
-출처 : [https://www.oss.kr/info_techtip/show/32d5f561-b998-496c-a328-a58a5555e2c6](https://www.oss.kr/info_techtip/show/32d5f561-b998-496c-a328-a58a5555e2c6) , [https://d2.naver.com/helloworld/47656](https://d2.naver.com/helloworld/47656)
+
+
+출처 : [https://www.oss.kr/info_techtip/show/32d5f561-b998-496c-a328-a58a5555e2c6](https://www.oss.kr/info_techtip/show/32d5f561-b998-496c-a328-a58a5555e2c6) , [https://d2.naver.com/helloworld/47656](https://d2.naver.com/helloworld/47656) , [http://blog.daum.net/tlos6733/121](http://blog.daum.net/tlos6733/121)
 
