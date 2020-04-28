@@ -1,5 +1,5 @@
 ---
-title: "스터디 7주차"
+title: "스터디 7주차-1"
 date: 2020-04-28
 categories: Study
 ---
@@ -8,6 +8,7 @@ categories: Study
 
 ### 바인더의 개념
 
+<br>
 Android는 리눅스 기반이다. 그러므로 스마트폰과 같은 모바일 기기를 지원하기 위해 Android에서 기본으로 제공하는 시스템 기능은 모두 서버 프로세스 형태로 제공된다.
 즉, 화면을 그리거나(Surface Flinger) 소리를 내고 조절(Audio Flinger)하는 기능 등을 사용하려면 사용자 모드(User Mode)에서 동작하는 별도의 프로세스에 화면을 그리고 소리를 내라고 요청해야 한다.
 
@@ -17,7 +18,7 @@ Android는 리눅스 기반이다. 그러므로 스마트폰과 같은 모바일
 
 (애플리케이션 프로세스의 Location 서비스와 Camera 서비스 호출)
 
-그렇다면 Linux에서 제공하는 소켓, Pipe 등과 같은 IPC(Inter Process Communication)를 사용하지 않고 왜 바인더라는 메커니즘을 새로 만들었을까? 바로 성능 때문이다.
+<br>그렇다면 Linux에서 제공하는 소켓, Pipe 등과 같은 IPC(Inter Process Communication)를 사용하지 않고 왜 바인더라는 메커니즘을 새로 만들었을까? 바로 성능 때문이다.
 
 앞서 살펴본 것처럼 Android의 모든 시스템 기능은 서버 프로세스로 제공되기 때문에 프로세스 사이에 최적화된 통신 방법이 필요하고 그 고민의 결과가 바인더이다. 바인더는 모든 프로세스가 공유하는 커널 메모리를 참조하게 함으로써 메모리 복사 오버헤드를 최소화한다. 뿐만 아니라 C++을 이용해 작성된 RPC(Remote Procedure Call) 프레임워크를 제공하여 생산성이 높다.
 
@@ -39,20 +40,20 @@ Android는 리눅스 기반이다. 그러므로 스마트폰과 같은 모바일
 
 ![2](https://d2.naver.com/content/images/2015/06/helloworld-47656-6.png)
 
-<br>
+<br><br>
 커널 공간을 사용하도록 바인더 드라이버가 구현되어 있다.
 바인더 드라이버의 역할은 각 프로세스가 매핑해 놓은 메모리 주소와 커널 공간의 메모리 주소를 변환하여 참조해 사용할 수 있도록 하는 것이다.
 
 ![3](https://d2.naver.com/content/images/2015/06/helloworld-47656-7.png)
 
-<br>
+<br><br>
 Linux에서 사용하는 표준 방법인 ioctl 시스템 함수를 이용해 바인더 드라이버를 사용할 수 있다. 이와 같은 일련의 메커니즘을 바인더 IPC라고 한다.
 
 ![4](https://d2.naver.com/content/images/2015/06/helloworld-47656-8.png)
 
 (바인더 드라이버를 통한 프로세스 간 사용자 데이터 송수신 구조 그림)
 
-<br>
+<br><br>
 바인더 IPC를 이용해 주고받는 데이터를 가공해서 RPC(Remote Procedure Call)로 만들어 주는 C++ 프레임워크가 제공되고 시스템 서비스를 만들 때 사용한다. 다른 프로세스에서 제공하는 함수를 마치 내 함수처럼 사용할 수 있게 되는 것이다.
 
 ![5](https://d2.naver.com/content/images/2015/06/helloworld-47656-9.png)
@@ -83,7 +84,7 @@ _ _ _
 ![7](https://t1.daumcdn.net/cfile/tistory/2433644B568FC3972C)
 
 <br><br>
-<b><big> 바인더 IPC 데이터의 전달</big></b>
+<b><big>바인더 IPC 데이터의 전달</big></b>
 
 - 바인더를 통해 RPC를 시도하는 응용 프로그램은 open() 시스템 콜을 통해 바인더 드라이버의 파일 디스크립터를 얻는다.
 - mmap() 시스템콜을 통해 커널 내에서 IPC 데이터를 수신하기 위한 공유 공간을 확보한다.
@@ -91,8 +92,8 @@ _ _ _
 
 ![8](https://t1.daumcdn.net/cfile/tistory/217FD5375693352C14)
 
-<br><br>
-<b><big> 바인더 IPC 데이터의 흐름</big></b>
+<br><br><br>
+<b><big>바인더 IPC 데이터의 흐름</big></b>
 
 <br>
 ![8](https://t1.daumcdn.net/cfile/tistory/27367D425693383A03)
@@ -106,5 +107,51 @@ _ _ _
 
 ■ <b>바인더 드라이버 계층</b> : IPC 계층으로부터 전달받은 바인더 IPC 데이터를 통해 서비스를 가진 서비스서버를 찾은 후 IPC 데이터를 전달한다.
 
-(출처 : https://d2.naver.com/helloworld/47656 , http://blog.daum.net/tlos6733/120?category=16034,
-https://dev-ahn.tistory.com/89?category=613307 )
+<br><br><br>
+<b><big>바인더 어드레싱</big></b>
+
+<br>
+바인더 드라이버는 IPC 데이터의 핸들을 가지고 서비스 서버를 찾는데, 이러한 과정을 바인더 어드레싱(Binder Addressing)이라고 정의
+
+다양한 서비스를 모두 목록화해서 관리하는 <b>컨텍스트 매니저</b>라는 특별한 프로세스가 서비스마다 핸들(바인더 IPC의 목적지 주소로 사용)라는 번호 값을 할당하고, 서비스 추가/검색 등의 관리 기능을 수행
+
+<br><b>■ 서비스 등록</b>
+
+바인더 어드레싱을 위해 서비스 서버는 자신이 가진 서비스에 대한 접근 정보를 컨텍스트 매니저에 등록해야 한다.
+
+안드로이드 부팅 단계에서 끝나고, 등록이 끝나면 컨텍스트 매니저의 서비스 목록, 바인더 드라이버의 바인더 노드, 그리고 서비스 서버들의 서비스가 연결되어 다른 프로세스가 사용가능한 상태가 된다.
+
+<br>
+서비스 서버와 컨텍스트 매니저 사이의 IPC 그림
+<br>![9](https://t1.daumcdn.net/cfile/tistory/217CF84C56933CE812)
+
+<br><br><b>■ 서비스 검색</b>
+
+서비스 클라이언트와 컨텍스트 매니저 사이의 IPC 그림
+<br>![10](https://t1.daumcdn.net/cfile/tistory/27097B4C56933CEB1D)
+
+<br><br><b>■ 서비스 사용</b>
+
+서비스 클라이언트와 서비스 서버 사이의 IPC
+<br>![11](https://t1.daumcdn.net/cfile/tistory/266F354C56933CED20)
+
+<br><br><b><big>※ mmap</big></b>
+
+<br>![12](https://t1.daumcdn.net/cfile/tistory/252FA650569358E110)
+
+<br><br>일반적으로 커널 공간에서 사용자 공간으로 데이터를 전달하기 위해서는 copy_to_user() 함수를 이용해서 사용자 공간으로 데이터를 복사한다.
+
+그러나 대용량의 데이터를 응용 프로그램과 주고 받아야 하는 상황에서 read, write, ioctl 같은 시스템 콜 함수를 쓴다면 매우 비효율적이며, 커널 공간이 부족할수 있다. -> 문제점을 해결하기 위해 mmap을 사용, 응용 프로그램이 커널의 물리 메모리에 직접 접근 가능하도록 해 준다.
+
+바인더를 이용하는 프로세스는 바인더 드라이버의 mmap() 함수를 통해 사용자 공간과 매핑된 바인더 mmap 영역을 만든다. 그리고 바인더 드라이버는 커널 공간의 데이터 수신영역에 데이터를 저장만하고, 사용자 공간에 mmap 된 영역의 정보만 알려준다. 따라서 프로세스는 사용자 공간의 mmap 된 영역의 주소만 알고 있어도 커널 공간에 존재하는 데이터를 참조 할 수 있다.
+
+이 함수의 주요 목적은 사용자 프로세스가 전달한 크기만큼 커널 공간에 IPC 데이터 수신 버퍼를 확보하는 것이다.
+
+<br><br><b><big>정리 및 요약</big></b>
+
+<br>바인더는 안드로이드의 서비스를 보유한 서비스 서버, 서비스를 사용하고자 하는 서비스 클라이언트, 서비스의 위치를 알려주는 컨텍스트 매니저, 그리고 이들 모두를 중재하는 바인더 드라이버로 구성된다.
+
+<br>![13](https://t1.daumcdn.net/cfile/tistory/23632F3656935F590A)
+
+
+(출처 : https://d2.naver.com/helloworld/47656<br>http://blog.daum.net/tlos6733/120?category=16034<br>https://dev-ahn.tistory.com/89?category=613307)
