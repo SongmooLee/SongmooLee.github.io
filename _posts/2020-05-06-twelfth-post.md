@@ -68,4 +68,61 @@ Binder Driver를 위하여 Service Manager에서 핵심 서비스를 추가할 �
 
 셋째 : IPC 레이어에 위치한 구성요소가 JNI를 통해 네이티브 서비스 프레임워크의 구성요소와 연결돼 있다.
 
+_ _ _
 
+### Intent란 무엇인가?
+
+Intent는 안드로이드 앱 내부 혹은 외부 컴포넌트간의 호출및 정보 전달을 하는 역할을 합니다.
+
+앱 구성요소(컴포넌트)
+* Activity
+* Service
+* BroadCast Receiver
+* Content Provider
+
+앱의 구성요소는 위의 4가지 이며 해당 구성요소간의 호출및 정보를 전달하는데 사용하는 것이 Intent 입니다. 명시적 인텐트와 암시적 인텐트 2가지로 분류 할수 있습니다.
+
+1) 명시적 인텐트
+- 호출할 대상을 지정 하여 사용
+
+```
+Intent intent = new Intent(context, CallActivity.class);
+startActivity(intent);
+```
+다른 Acitivity를 시작 하는 소스입니다.
+시작할 Acitivity를 지정하여 Intent를 생성 하여 사용합니다.
+
+<br>
+```
+Intent intent = new Intent(context, MyService.class);
+startService(intent);
+```
+로컬서비스를 시작하는 소스입니다. (참고로 원격서비스는 바인딩하는 방식으로 구현됩니다.)
+Acitivity 시작하는 것과 크게 다르지 않게 Service를 지정하여 Intent를 생성하여 사용 하는 것을 알수있습니다.
+
+<br>2) 암시적 인텐트
+ - 컴포넌트외의 속성(컴포넌트를 지정하면 명시적 인텐트가 된다)들로 구성하여 속성에 부합하는 컴포넌트를 실행
+
+```
+Intent intent = new Intent(
+              "android.intent.action.CALL"
+              , Uri.parse(tel));
+startActivity(intent);
+```
+전화걸기를 요청 하는 소스입니다.
+Action값을 android.intent.action.CALL을 지정해서 Acitivity를 실행하면 디바이스내에 해당 Action값 속성을 가지고 있는 Activity를 선택할수 있는 창이 노출 됩니다.
+
+
+_ _ _
+
+### 액티비티 매니저
+
+<br>자바 시스템 서비스의 일종인 코어 플랫폼 서비스로서 안드로이드 애플리케이션 컴포넌트인 액티비티, 서비스, 브로드캐스트 리서버 등을 생성하고, 이들의 생명주기를 관리하는 역할
+
+![4](https://t1.daumcdn.net/cfile/tistory/2272CD4556A73D2E05)
+
+<br>![5](https://t1.daumcdn.net/cfile/tistory/267BC33F56A73A9A26)
+
+
+출처: https://dev-ahn.tistory.com/92?category=613307
+http://devstory.ibksplatform.com/2017/10/intent.html
