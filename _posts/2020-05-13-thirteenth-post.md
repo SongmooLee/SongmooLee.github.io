@@ -192,6 +192,8 @@ _ _ _
 
 ```
 
+<br>레이아웃 파라미터(Layout Parameter)는 뷰가 배치되는 부모, 즉 레이아웃에 소속되는 속성이며 부모에게 차일드 뷰를 배치할 방법을 지시한다.
+
 <br>
 ```
 // *참고 Parcel.java
@@ -239,7 +241,8 @@ public final class WindowManagerImpl implements WindowManager {
 
     private final Window mParentWindow; // Window 객체 관련 변수..
 
-    private IBinder mDefaultToken;
+    private IBinder mDefaultToken; // 인터페이스 역할
+    // 클라이언트가 bindService() 를 호출하면, 클라이언트가 서비스에 연결되면서 IBinder가 반환되고, 클라이언트가 IBinder를 받으면 이 인터페이스를 통해 주고 받는 것이 가능해지는 것.
 
     public WindowManagerImpl(Context context) {
         this(context, null);
@@ -260,6 +263,38 @@ public final class WindowManagerImpl implements WindowManager {
 
 ```
 
-// 진행중
+
+_ _ _
 
 
+### WindowManagerGlobal.java
+
+```
+ @UnsupportedAppUsage
+    public static void initialize() {
+        getWindowManagerService();
+    } // 초기화
+
+    @UnsupportedAppUsage
+    public static WindowManagerGlobal getInstance() {
+        synchronized (WindowManagerGlobal.class) { //
+            if (sDefaultWindowManager == null) {
+                sDefaultWindowManager = new WindowManagerGlobal();
+            }
+            return sDefaultWindowManager;
+        }
+    }
+
+     @UnsupportedAppUsage
+    public static IWindowManager getWindowManagerService() {
+        synchronized (WindowManagerGlobal.class) { // 내부에 동기화가 필요한 부분에만 synchronized(this) 블록으로 처리 한다. 메소드마다 syncrhonized처리가 되있다.
+            if (sWindowManagerService == null) {
+                sWindowManagerService = IWindowManager.Stub.asInterface(
+                        ServiceManager.getService("window"));
+                        ...
+                        //
+```
+
+WindowManagerService.java
+이 파일에는 WIndowManager의 실질적인 Service가 구현되어 있다.
+WindowManagerService에서 windowmanagerglobal들의 메소드를 import를 하는것을 확인 가능..
