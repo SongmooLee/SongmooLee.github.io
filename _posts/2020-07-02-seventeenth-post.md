@@ -394,5 +394,6 @@ frameworks/base/core/java/android/view/Window.java의 781줄
 ```
 
 해시맵과 switchcase 비교.
+[view링크](https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/view/View.java)
 view.java 5391줄 -> 많은 swtich case 구문. 직접 작성해서 비교해보기.
 enummap으로도?
