@@ -29,3 +29,9 @@ frameworks/base/core/java/android/view/WindowManager.java 의 2895 줄 --> if el
 frameworks/base/core/java/android/view/Window.java의 781줄 --> if else는 많으나 비교적 조금 짧음, 직접 짜서 분석해볼 필요성은 있을듯, 호출횟수 보기
 
 아니면 다른 팀원들이 지적했던 곳 다시 확인하기. ex) LayoutParams
+
+이건 무슨 코드인가
+
+![1](https://blogfiles.pstatic.net/MjAyMDA3MTVfMjgg/MDAxNTk0ODEzMDk2NjM5.u-hkRZ7Ztd8dXn-qFltxrSyNNYtkPAsw2wZn9XG3tk4g.WOupoehcCMy6fAazwGjbUBFrEn9ZFKr6jqMkgn79Xs8g.PNG.goonta96/image.png)
+
+![2](https://blogfiles.pstatic.net/MjAyMDA3MTVfMTQx/MDAxNTk0ODEzMTM5MDgw.s_tjsB0pY-GTw6HQWcW1feUKlNVTh0U59Pwq3nL4yvUg.eAEq8GqguMbzEVZmUTK8fUWjo6T5RSmPYFJPVyNa3EIg.PNG.goonta96/image.png)
